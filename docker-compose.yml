@@ -31,7 +31,7 @@ services:
       - './volumes/freshrss/ext:/var/www/FreshRSS/extensions'
     environment:
       - 'CRON_MIN=4,34'
-      - 'TZ=America/New_York'
+      - 'TZ=America/Los_Angeles'
     expose:
       - 8080
 
@@ -45,4 +45,4 @@ services:
       - './backups:/repo'
     environment:
       BORG_REPO: '/repo'
-      BORG_PASSPHRASE: '[super secret passphrase here]'
+      BORG_PASSPHRASE: 'BORG'
