@@ -1,7 +1,7 @@
-rss-bridge.example.com {
+199.244.48.45:80 {
     reverse_proxy rss_bridge:80
 }
 
-rss.example.com {
+199.244.48.45:8080 {
     reverse_proxy freshrss:80
 }
