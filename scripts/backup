@@ -6,8 +6,7 @@ case "$1" in
         # this once, but if you lose your backup repo you'll need this command.
         docker-compose run --rm borg init \
             --encryption repokey-blake2 \
-            --progress \
-            /repo
+           /borg-repo
     ;;
 
     "create")
@@ -16,7 +15,7 @@ case "$1" in
             --stats \
             --progress \
             --compression zlib,5 \
-            /repo::{now} \
+            /borg-repo::{now} \
             /volumes
 
         echo "Done! You're all backed up."
@@ -24,9 +23,9 @@ case "$1" in
 
     "list")
         if [ -z "$2" ]; then
-            docker-compose run --rm borg list /repo
+            docker-compose run --rm borg list /borg-repo
         else
-            docker-compose run --rm borg list /repo::$2
+            docker-compose run --rm borg list /borg-repo::$2
         fi
     ;;
 
@@ -42,7 +41,7 @@ case "$1" in
             exit 1
         fi
 
-        docker-compose run --rm --workdir / borg extract --list /repo::$2
+        docker-compose run --rm --workdir / borg extract --list /borg-repo::$2
     ;;
 
     "export")

@@ -1,7 +1,11 @@
-199.244.48.45:80 {
-    reverse_proxy rss_bridge:80
+http:// {
+  	redir https://{host}{uri}
 }
 
-199.244.48.45:8080 {
-    reverse_proxy freshrss:80
+rss-bridge.patladjan.com {
+    reverse_proxy rss-bridge:80
+}
+
+rss.patladjan.com {
+    reverse_proxy freshrss-app:80
 }

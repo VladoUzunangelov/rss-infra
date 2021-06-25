@@ -2,3 +2,6 @@ Twitter
 Reddit
 YouTube
 Instagram
+DuckDuckGo
+GoogleSearch
+TheHackerNews
