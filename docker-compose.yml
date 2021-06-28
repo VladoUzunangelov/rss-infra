@@ -20,7 +20,8 @@ services:
       - 80
     volumes:
       - './config/rssbridge/whitelist.txt:/app/whitelist.txt'
-
+      - './config/rssbridge/config.ini.php:/app/config.default.ini.php'
+  
   freshrss-app:
     image: freshrss/freshrss:latest
     container_name: freshrss-app
