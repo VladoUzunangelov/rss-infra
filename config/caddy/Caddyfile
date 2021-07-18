@@ -9,3 +9,8 @@ rss-bridge.patladjan.com {
 rss.patladjan.com {
     reverse_proxy freshrss-app:80
 }
+
+wallabag.patladjan.com {
+  reverse_proxy wallabag-app:80
+}
+

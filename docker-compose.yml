@@ -49,9 +49,58 @@ services:
       - 5432
     environment:
       POSTGRES_USER: freshrss
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: ${RSS_POSTGRES_PASSWORD}
       POSTGRES_DB: rss-db
+
+  wallabag-app:
+    image: wallabag/wallabag
+    container_name: wallabag-app
+    hostname: wallabag-app
+    environment:
+      - POSTGRES_USER=wallabag
+      - POSTGRES_PASSWORD=${BKMK_POSTGRES_PASSWORD}
+      - SYMFONY__ENV__DATABASE_DRIVER=pdo_pgsql
+      - SYMFONY__ENV__DATABASE_HOST=wallabag-db
+      - SYMFONY__ENV__DATABASE_PORT=5432
+      - SYMFONY__ENV__DATABASE_CHARSET=utf8
+      - SYMFONY__ENV__SECRET=${WALLABAG_SECRET}
+      - SYMFONY__ENV__DATABASE_NAME=wallabag
+      - SYMFONY__ENV__DATABASE_USER=wallabag
+      - SYMFONY__ENV__DATABASE_PASSWORD=${BKMK_POSTGRES_PASSWORD}
+      - POPULATE_DATABASE=True
+      - SYMFONY__ENV__MAILER_USER=~
+      - SYMFONY__ENV__MAILER_PASSWORD=~
+      - SYMFONY__ENV__DOMAIN_NAME=https://wallabag.patladjan.com
+    expose:
+      - 80
+    volumes:
+      - './volumes/wallabag/images:/var/www/wallabag/web/assets/images'
+      - './volumes/wallabag/data:/var/www/wallabag/data'
+    depends_on:
+      - wallabag-db
+      - wallabag-redis
+
+  wallabag-db:
+    image: postgres:12-alpine
+    container_name: wallabag-db
+    hostname: wallabag-db
+    restart: unless-stopped
+    volumes:
+      - './volumes/wallabag-db:/var/lib/postgresql/data'
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: wallabag
+      POSTGRES_PASSWORD: ${BKMK_POSTGRES_PASSWORD}
+      POSTGRES_DB: wallabag-db
   
+
+  wallabag-redis:
+    image: redis:alpine
+    container_name: wallabag-redis
+    volumes:
+      - "./volumes/wallabag-redis:/dat"
+
   ##
   # Backup
   #
