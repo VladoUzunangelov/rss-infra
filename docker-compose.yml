@@ -71,6 +71,7 @@ services:
       - SYMFONY__ENV__MAILER_USER=~
       - SYMFONY__ENV__MAILER_PASSWORD=~
       - SYMFONY__ENV__DOMAIN_NAME=https://wallabag.patladjan.com
+      - TRUSTED_PROXIES=caddy
     expose:
       - 80
     volumes:

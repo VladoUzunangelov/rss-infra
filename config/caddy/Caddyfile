@@ -1,5 +1,5 @@
 http:// {
-  	redir https://{host}{uri}
+	redir https://{host}{uri}
 }
 
 rss-bridge.patladjan.com {
