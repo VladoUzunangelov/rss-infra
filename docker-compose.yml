@@ -71,12 +71,12 @@ services:
       - SYMFONY__ENV__MAILER_USER=~
       - SYMFONY__ENV__MAILER_PASSWORD=~
       - SYMFONY__ENV__DOMAIN_NAME=https://wallabag.patladjan.com
-      - TRUSTED_PROXIES=caddy
     expose:
       - 80
     volumes:
       - './volumes/wallabag/images:/var/www/wallabag/web/assets/images'
       - './volumes/wallabag/data:/var/www/wallabag/data'
+      - './config/wallabag/app.php:/var/www/wallabag/web/app.php'
     depends_on:
       - wallabag-db
       - wallabag-redis
